@@ -1,19 +1,18 @@
 package com.deference.embydiscovery
 
-import android.app.Activity
 import android.content.Intent
 import android.net.nsd.NsdManager
 import android.net.nsd.NsdManager.DiscoveryListener
 import android.net.nsd.NsdServiceInfo
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
-import androidx.annotation.RequiresExtension
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.core.net.toUri
 import com.deference.embydiscovery.Const.SERVICE_TYPE
 
-class DiscoveryActivity : Activity() {
+class DiscoveryActivity : ComponentActivity() {
     private var nsdManager: NsdManager? = null
     private var discoveryListener: DiscoveryListener? = null
 
@@ -22,6 +21,9 @@ class DiscoveryActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         discoverService()
+		setContent{
+		
+		}
     }
 
     private fun discoverService() {
@@ -52,7 +54,6 @@ class DiscoveryActivity : Activity() {
         Handler().postDelayed({
             if (!found) {
                 showToast("Server not found")
-                finish()
             }
         }, 5000)
     }
